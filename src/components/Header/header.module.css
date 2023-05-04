@@ -1,0 +1,114 @@
+.headerWrapper {
+  position: relative;
+  height: 620px;
+  background-color: #ffb20e;
+  padding: 132px 0;
+  font-family: var(--source-sans);
+}
+
+.heading {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 88px;
+  color: #ffffff;
+}
+
+.descr {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 120%;
+  color: #504f4f;
+}
+
+.orderCard {
+  position: relative;
+  width: 856px;
+  height: 194.44px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.deliveryBtn {
+  display: flex;
+  align-items: center;
+  color: #f17228;
+  font-weight: 700;
+  font-size: 18px;
+  border: none;
+  padding: 10px 24px;
+  width: 148px;
+  height: 38px;
+  background: rgba(241, 114, 40, 0.1);
+  border-radius: 8px;
+}
+.pickupBtn {
+  display: flex;
+  align-items: center;
+  color: #757575;
+  font-weight: 700;
+  font-size: 18px;
+  border: none;
+  padding: 10px 24px;
+  width: 148px;
+  height: 38px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.bikeImg {
+  margin-right: 10px;
+}
+
+.searchWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.headerInput {
+  padding: 7px 0px 8px 40px;
+  width: 593px;
+  height: 49px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: none;
+}
+
+.mapImg {
+  position: absolute;
+  top: 127px;
+  left: 35px;
+}
+
+.findImg {
+  margin-right: 10px;
+}
+
+.findBtn {
+  display: flex;
+  align-items: center;
+  padding: 21px 48px;
+  width: 199px;
+  height: 60px;
+  background: linear-gradient(95.71deg, #ff7a7a -39.64%, #f75900 135.31%);
+  border-radius: 8px;
+  border: none;
+  font-family: var(--source-sans);
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.ramenWrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

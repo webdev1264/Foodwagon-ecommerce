@@ -1,0 +1,101 @@
+.navWrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 78px;
+  color: #424242;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  width: 197px;
+  height: 78px;
+}
+
+.locationWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.locationLink {
+  color: #424242;
+  text-decoration: none;
+}
+
+.locationDescr {
+  margin: 0;
+}
+
+.locationDeliver {
+  font-family: var(--source-sans);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.mapMarker {
+  margin: 0 10px;
+  transform: translateY(-3px);
+}
+
+.locationSubtitle,
+.locationBody {
+  font-family: var(--open-sans);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+
+.locationBody {
+  font-weight: 700;
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.searchDescr {
+  font-family: var(--source-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+}
+
+.searchImg {
+  margin: 0 8px;
+}
+
+.searchLink {
+  text-decoration: none;
+  color: #424242;
+}
+
+.loginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 118px;
+  height: 46px;
+  margin-left: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-family: var(--source-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffb800;
+  box-shadow: 0px 5px 10px rgba(255, 174, 0, 0.26),
+    0px 20px 40px rgba(255, 174, 0, 0.29);
+}
+
+.loginBtn:active {
+  transform: scale(1.05);
+}
+
+.loginImg {
+  margin-right: 10px;
+}
