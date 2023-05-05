@@ -11,9 +11,9 @@ import { Container } from "react-bootstrap";
 const Header: React.FC = () => {
   return (
     <header className={style.headerWrapper}>
-      <Container>
+      <Container className={style.container}>
         <Row>
-          <Col md={7}>
+          <Col md={8}>
             <h1 className={style.heading}>Are you starving?</h1>
             <p className={style.descr}>
               Within a few clicks, find meals that are accessible near you
@@ -30,16 +30,18 @@ const Header: React.FC = () => {
                 </button>
               </div>
               <div className={style.searchWrapper}>
-                <img
-                  className={style.mapImg}
-                  src={mapMarker}
-                  alt="map-marker"
-                />
-                <input
-                  className={style.headerInput}
-                  placeholder="Enter Your Address"
-                  type="text"
-                />
+                <div className={style.inputWrapper}>
+                  <img
+                    className={style.mapImg}
+                    src={mapMarker}
+                    alt="map-marker"
+                  />
+                  <input
+                    className={style.headerInput}
+                    placeholder="Enter Your Address"
+                    type="text"
+                  />
+                </div>
                 <button className={style.findBtn}>
                   <img className={style.findImg} src={search} alt="search" />
                   <span>Find Food</span>
@@ -47,9 +49,14 @@ const Header: React.FC = () => {
               </div>
             </form>
           </Col>
-          <Col md={5}>
+          <Col md={4}>
             <div className={style.ramenWrapper}>
-              <img src={ramen} alt="ramen" width={604} />
+              <img
+                className={style.ramenImg}
+                src={ramen}
+                alt="ramen"
+                width={"100%"}
+              />
             </div>
           </Col>
         </Row>
