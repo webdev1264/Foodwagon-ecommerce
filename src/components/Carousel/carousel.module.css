@@ -12,11 +12,13 @@
 
 .carouselItem {
   list-style: none;
-  width: 247px;
+  width: 246px;
 }
 
 .prevBtn,
 .nextBtn {
+  position: absolute;
+  top: 85px;
   width: 76px;
   height: 76px;
   background: #ffb20e;
@@ -27,13 +29,9 @@
 }
 
 .prevBtn {
-  position: absolute;
-  top: 120px;
-  left: -70px;
+  left: -80px;
 }
 
 .nextBtn {
-  position: absolute;
-  top: 120px;
-  right: -70px;
+  right: -80px;
 }

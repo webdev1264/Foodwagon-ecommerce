@@ -9,7 +9,7 @@ const Carousel: React.FC = () => {
 
   function handleOnNextClick() {
     flushSync(() => {
-      if (index < itemsList.length - 2) {
+      if (index < itemsList.length - 3) {
         setIndex((prev) => prev + 1);
       } else {
         setIndex(2);
@@ -55,7 +55,7 @@ const Carousel: React.FC = () => {
                 className={style.carouselItem}
                 ref={id === index ? selectedItem : null}
               >
-                <img src={src} alt={alt} width={247} />
+                <img src={src} alt={alt} width={246} />
                 <h3>{name}</h3>
                 <a href="#">{location}</a>
                 <p>{`$${price}`}</p>
