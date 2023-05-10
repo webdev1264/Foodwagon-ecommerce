@@ -3,10 +3,7 @@
   height: 765px;
 }
 .popularHeader {
-  font-family: var(--source-sans);
-  font-style: normal;
   font-weight: 700;
   font-size: 43px;
-  text-align: center;
   color: #212121;
 }

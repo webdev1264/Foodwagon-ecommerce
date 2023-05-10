@@ -4,6 +4,8 @@ import Header from "./components/Header/Header";
 import "./App.css";
 import Info from "./components/Info/Info";
 import Popular from "./components/Popular/Popular";
+import Restaurants from "./components/Restaurants/Restaurants";
+import Search from "./components/Search/Search";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <main>
         <Info />
         <Popular />
+        <Restaurants />
+        <Search />
       </main>
     </ThemeProvider>
   );

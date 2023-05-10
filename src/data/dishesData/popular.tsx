@@ -3,8 +3,9 @@ import cake from "../img/carousel/cake.jpg";
 import dancake from "../img/carousel/dancake.jpg";
 import sandwitch from "../img/carousel/sandwitch.jpg";
 import soup from "../img/carousel/soup.jpg";
+import { PopularItemInterface } from "../../types/interfaces";
 
-const itemsList = [
+const popularItems: PopularItemInterface[] = [
   {
     id: 0,
     src: burger,
@@ -85,6 +86,22 @@ const itemsList = [
     location: "Foody man",
     price: "2.79",
   },
+  {
+    id: 10,
+    src: cake,
+    alt: "Cake",
+    name: "Toffe’s Cake",
+    location: "Top Sticks",
+    price: "4.00",
+  },
+  {
+    id: 11,
+    src: dancake,
+    alt: "Dancake",
+    name: "Dancake",
+    location: "Cake World",
+    price: "1.99",
+  },
 ];
 
-export default itemsList;
+export default popularItems;

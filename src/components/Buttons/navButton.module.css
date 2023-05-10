@@ -1,0 +1,49 @@
+.btnWrapper {
+  position: absolute;
+}
+
+.navBtn,
+.navBtn {
+  width: 76px;
+  height: 76px;
+  background: #ffb20e;
+  border: none;
+  box-shadow: 0px 5px 8px rgba(222, 151, 0, 0.24),
+    0px 14px 32px rgba(255, 178, 14, 0.29);
+  border-radius: 92px;
+}
+
+.chevron {
+  color: #ffffff;
+}
+
+.left,
+.right {
+  top: 165px;
+}
+
+.left {
+  left: -80px;
+}
+
+.right {
+  right: -80px;
+}
+
+.topLeft,
+.topRight {
+  top: -50px;
+}
+
+.topLeft {
+  left: 500px;
+}
+
+.topRight {
+  right: 500px;
+}
+
+.disabled {
+  background-color: rgb(190, 189, 189);
+  box-shadow: none;
+}

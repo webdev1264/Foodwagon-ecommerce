@@ -1,0 +1,112 @@
+.restaurants {
+  height: 1274px;
+}
+
+.restaurantsHeader {
+  margin-bottom: 84px;
+  font-weight: 700;
+  font-size: 43px;
+  color: #212121;
+}
+
+.restaurantWrapper {
+  position: relative;
+  margin-bottom: 64px;
+}
+
+.restaurantImg {
+  border-radius: 10px;
+}
+
+.promoWrapper {
+  display: flex;
+  gap: 8px;
+  width: 65%;
+  position: absolute;
+  top: 24px;
+  left: 36px;
+}
+
+.promo,
+.delivery {
+  font-family: var(--source-sans);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 120%;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+.promo {
+  width: 134px;
+  height: 42px;
+  background: #f17228;
+}
+
+.delivery {
+  width: 101px;
+  height: 42px;
+  background: #ffb30e;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.restaurantName {
+  font-weight: 700;
+  font-size: 20px;
+  color: #424242;
+}
+
+.rating {
+  color: #ffb30e;
+}
+
+.now,
+.tomorrow {
+  font-family: var(--source-sans);
+  font-weight: 700;
+  font-size: 20px;
+  padding: 8px 16px;
+  height: 42px;
+  border-radius: 16px;
+  margin-top: 40px;
+}
+
+.now {
+  width: 132px;
+  background: rgba(121, 185, 60, 0.2);
+  color: #79b93c;
+}
+
+.tomorrow {
+  width: 196px;
+  background: rgba(241, 114, 40, 0.2);
+  color: #f17228;
+}
+
+.restaurantsBtn {
+  display: block;
+  padding: 21px 48px;
+  width: 178px;
+  height: 60px;
+  margin: 16px auto 0;
+  background: linear-gradient(97.86deg, #ffba26 -8.95%, #ff9a0e 109.24%);
+  box-shadow: 0px 5px 10px rgba(255, 174, 0, 0.26),
+    0px 20px 40px rgba(255, 174, 0, 0.29);
+  border-radius: 14px;
+  border: none;
+  font-family: var(--source-sans);
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.chevronRight {
+  font-size: 14px;
+  margin-left: 6px;
+}

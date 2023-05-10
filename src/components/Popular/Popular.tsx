@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import Carousel from "../Carousel/Carousel";
+import Carousel from "../Carousels/PopularsCarousel/Carousel";
 import style from "./popular.module.css";
 
 const Popular: React.FC = () => {

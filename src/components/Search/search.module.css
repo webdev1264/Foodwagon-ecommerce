@@ -1,0 +1,20 @@
+.search {
+  height: 571px;
+  padding: 82px 55px;
+  background-color: #fefaf1;
+  text-align: center;
+}
+
+.viewAll {
+  font-family: var(--source-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffb30e;
+  text-decoration: none;
+}
+
+.btnChevronRight {
+  font-size: 14px;
+}
