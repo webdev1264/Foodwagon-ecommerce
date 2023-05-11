@@ -67,6 +67,11 @@ const searchBy: SearchByInterface[] = [
     name: "Steak",
     img: steak,
   },
+  {
+    id: 12,
+    name: "Steak",
+    img: steak,
+  },
 ];
 
 export default searchBy;

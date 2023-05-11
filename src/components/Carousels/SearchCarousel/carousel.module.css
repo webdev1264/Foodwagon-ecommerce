@@ -2,18 +2,35 @@
   position: relative;
 }
 
+.itemsContainer {
+  overflow: hidden;
+}
+
 .itemsWrapper {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  overflow: hidden;
   gap: 34px;
   padding: 80px 0;
   list-style: none;
+  transition: 1s all;
+}
+
+.fullList {
+  flex-wrap: wrap;
+  gap: 0;
+  transition: none;
+}
+
+.viewAll {
+  font-family: var(--source-sans);
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffb30e;
+  cursor: pointer;
 }
 
 .carouselItem {
-  transform: translateX(-118%);
   transition: 1s all;
 }
 

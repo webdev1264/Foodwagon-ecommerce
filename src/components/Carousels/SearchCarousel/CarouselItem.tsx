@@ -4,18 +4,12 @@ import style from "./carousel.module.css";
 
 interface CarouselItemProps {
   item: SearchByInterface;
-  selectedItem: React.RefObject<HTMLLIElement>;
-  index: number;
 }
 
-const CarouselItem: React.FC<CarouselItemProps> = ({
-  item,
-  selectedItem,
-  index,
-}) => {
-  const { id, name, img } = item;
+const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
+  const { name, img } = item;
   return (
-    <li className={style.carouselItem} ref={id === index ? selectedItem : null}>
+    <li className={style.carouselItem}>
       <img className={style.itemImg} src={img} alt={name} />
       <p className={style.itemDescr}>{name}</p>
     </li>
