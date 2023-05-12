@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
-import style from "./search.module.css";
 import Carousel from "../Carousels/SearchCarousel/Carousel";
+import style from "./search.module.css";
 
 const Search = () => {
   return (

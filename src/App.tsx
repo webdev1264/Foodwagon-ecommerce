@@ -6,6 +6,7 @@ import Info from "./components/Info/Info";
 import Popular from "./components/Popular/Popular";
 import Restaurants from "./components/Restaurants/Restaurants";
 import Search from "./components/Search/Search";
+import Features from "./components/Features/Features";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Popular />
         <Restaurants />
         <Search />
+        <Features />
       </main>
     </ThemeProvider>
   );

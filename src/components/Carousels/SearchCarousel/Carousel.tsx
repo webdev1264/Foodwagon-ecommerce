@@ -3,7 +3,7 @@ import CarouselItem from "./CarouselItem";
 import NavButton from "../../Buttons/NavButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import searchBy from "../../../data/dishesData/searchBy";
+import searchBy from "../../../data/foodData/searchBy";
 import style from "./carousel.module.css";
 
 const Carousel: React.FC = () => {
@@ -21,7 +21,10 @@ const Carousel: React.FC = () => {
 
   function handleOnViewAll() {
     setViewAll((prev) => !prev);
-    setIndex(0);
+    if (selectedItem.current !== null) {
+      selectedItem.current.style.transform = `translateX(0)`;
+      setIndex(0);
+    }
   }
 
   function carouselPositioning(direction: string) {
@@ -31,11 +34,10 @@ const Carousel: React.FC = () => {
       newIndex = 0;
     }
     if (selectedItem.current !== null) {
-      selectedItem.current.style.transform = `translate(-${newIndex * 17.1}%)`;
+      selectedItem.current.style.transform = `translateX(-${newIndex * 17.1}%)`;
       setIndex(newIndex);
     }
   }
-  console.log("----rendered")
   return (
     <>
       <div className={style.carousel}>

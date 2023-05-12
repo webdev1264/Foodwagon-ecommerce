@@ -16,7 +16,7 @@ interface PromoItemInterface {
   validity: number;
 }
 
-interface FeatureInterface {
+interface RestaurantsFeaturesInterface {
   id: number;
   name: string;
   descr: string;
@@ -41,10 +41,17 @@ interface SearchByInterface {
   img: string;
 }
 
+interface FeaturesInterface {
+  id: number;
+  img: string;
+  name: string;
+}
+
 export type {
   PopularItemInterface,
   PromoItemInterface,
-  FeatureInterface,
+  RestaurantsFeaturesInterface,
   RestaurantInterface,
   SearchByInterface,
+  FeaturesInterface,
 };

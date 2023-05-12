@@ -2,7 +2,7 @@ import { Container, Row } from "react-bootstrap";
 import RestaurantsItem from "./RestaurantsItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import restaurants from "../../data/dishesData/restaurants";
+import restaurants from "../../data/foodData/restaurants";
 import style from "./restaurants.module.css";
 
 const Restaurants: React.FC = () => {

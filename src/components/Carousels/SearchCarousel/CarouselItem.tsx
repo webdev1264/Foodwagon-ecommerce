@@ -11,7 +11,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
   return (
     <li className={style.carouselItem}>
       <img className={style.itemImg} src={img} alt={name} />
-      <p className={style.itemDescr}>{name}</p>
+      <p className={style.itemName}>{name}</p>
     </li>
   );
 };

@@ -3,7 +3,7 @@ import { flushSync } from "react-dom";
 import CarouselItem from "./CarouselItem";
 import NavButton from "../../Buttons/NavButton";
 import style from "./carousel.module.css";
-import popularItems from "../../../data/dishesData/popular";
+import popularItems from "../../../data/foodData/popular";
 
 const Carousel: React.FC = () => {
   const [index, setIndex] = useState<number>(2);

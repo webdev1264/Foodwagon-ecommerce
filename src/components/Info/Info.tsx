@@ -1,6 +1,6 @@
 import { Container, Row } from "react-bootstrap";
-import promoItems from "../../data/dishesData/promotions";
-import features from "../../data/dishesData/features";
+import promoItems from "../../data/foodData/promotions";
+import restaurantsFeatures from "../../data/foodData/restaurantsFeatures";
 import style from "./info.module.css";
 import InfoItem from "./InfoItem";
 import FeatureItem from "./FeatureItem";
@@ -17,7 +17,7 @@ const Info: React.FC = () => {
         <div className={style.features}>
           <h2 className={style.featuresHeader}>How does it work</h2>
           <div className={style.featuresWrapper}>
-            {features.map((feature) => (
+            {restaurantsFeatures.map((feature) => (
               <FeatureItem key={feature.id} {...feature} />
             ))}
           </div>

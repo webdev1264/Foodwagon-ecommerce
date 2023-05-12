@@ -1,0 +1,79 @@
+.featuresWrapper {
+  height: 916px;
+  padding: 130px 0 80px;
+  background: url("../../data/img/features/featuresBg.svg") center center/cover
+    no-repeat;
+}
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  padding: 55px;
+  height: 246px;
+  background: #ffffff;
+  margin: 0 auto;
+  box-shadow: 0px 14px 15px rgba(255, 174, 0, 0.01),
+    0px 27px 82px rgba(255, 174, 0, 0.28);
+  border-radius: 46px;
+}
+
+.feature {
+  display: flex;
+  justify-content: space-around;
+}
+
+.verticalRule {
+  border-left: 2px solid #cfcfcf;
+  height: 65%;
+}
+
+.verticalRule:last-of-type {
+  display: none;
+}
+
+.featureName {
+  font-family: var(--source-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 120%;
+  text-align: left;
+  margin: 26px 0 0 30px;
+  background: linear-gradient(92.84deg, #fb3c00 -47.72%, #ffb800 136.81%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.featureImg {
+  width: 40%;
+}
+
+.download {
+  padding-top: 80px;
+}
+
+.downloadName {
+  font-weight: 700;
+  font-size: 59px;
+  text-align: left;
+  background: linear-gradient(92.84deg, #ffb800 -47.72%, #ff8a00 136.81%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.downloadDescr {
+  font-family: var(--open-sans);
+  font-weight: 400;
+  font-size: 17px;
+  color: #827e7e;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}

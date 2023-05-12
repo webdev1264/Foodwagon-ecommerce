@@ -2,9 +2,9 @@ import location from "../../data/img/info/location.svg";
 import order from "../../data/img/info/order.svg";
 import payment from "../../data/img/info/payment.svg";
 import pleasure from "../../data/img/info/pleasure.svg";
-import { FeatureInterface } from "../../types/interfaces";
+import { RestaurantsFeaturesInterface } from "../../types/interfaces";
 
-const features: FeatureInterface[] = [
+const restaurantsFeatures: RestaurantsFeaturesInterface[] = [
   {
     id: 0,
     name: "Select location",
@@ -35,4 +35,4 @@ const features: FeatureInterface[] = [
   },
 ];
 
-export default features;
+export default restaurantsFeatures;

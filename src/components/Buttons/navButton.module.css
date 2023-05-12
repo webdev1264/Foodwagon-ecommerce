@@ -2,7 +2,6 @@
   position: absolute;
 }
 
-.navBtn,
 .navBtn {
   width: 76px;
   height: 76px;
@@ -11,6 +10,10 @@
   box-shadow: 0px 5px 8px rgba(222, 151, 0, 0.24),
     0px 14px 32px rgba(255, 178, 14, 0.29);
   border-radius: 92px;
+}
+
+.navBtn:active {
+  background-color: #bebdbd;
 }
 
 .chevron {
@@ -32,7 +35,7 @@
 
 .topLeft,
 .topRight {
-  top: -50px;
+  top: -29px;
 }
 
 .topLeft {
