@@ -7,6 +7,7 @@ import Popular from "./components/Popular/Popular";
 import Restaurants from "./components/Restaurants/Restaurants";
 import Search from "./components/Search/Search";
 import Features from "./components/Features/Features";
+import Details from "./components/Details/Details";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Restaurants />
         <Search />
         <Features />
+        <Details />
       </main>
     </ThemeProvider>
   );

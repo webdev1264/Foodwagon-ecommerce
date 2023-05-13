@@ -47,6 +47,15 @@ interface FeaturesInterface {
   name: string;
 }
 
+interface DetailsInterface {
+  id: number;
+  name: string;
+  span: string;
+  descr: string;
+  img: string;
+  alt: string;
+}
+
 export type {
   PopularItemInterface,
   PromoItemInterface,
@@ -54,4 +63,5 @@ export type {
   RestaurantInterface,
   SearchByInterface,
   FeaturesInterface,
+  DetailsInterface,
 };
