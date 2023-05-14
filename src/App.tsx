@@ -8,6 +8,8 @@ import Restaurants from "./components/Restaurants/Restaurants";
 import Search from "./components/Search/Search";
 import Features from "./components/Features/Features";
 import Details from "./components/Details/Details";
+import Order from "./components/Order/Order";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
         <Search />
         <Features />
         <Details />
+        <Order />
       </main>
+      <Footer />
     </ThemeProvider>
   );
 }

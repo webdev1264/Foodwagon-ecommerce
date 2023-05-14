@@ -9,7 +9,7 @@ const Details = () => {
     <section className={style.details}>
       <Container>
         {details.map((detail) => {
-          const { id, name, span, descr, img, alt } = detail;
+          const { id, name, span, descr, img, alt, imgPosition = "" } = detail;
           return (
             <div key={id} className={style.detailWrapper}>
               <div className={style.descrWrapper}>
@@ -21,9 +21,11 @@ const Details = () => {
                   Proceed to order <FontAwesomeIcon icon={faChevronRight} />
                 </button>
               </div>
-              <div>
-                <img className={style.detailImg} src={img} alt={alt} />
-              </div>
+              <img
+                className={`${style.detailImg} ${style[imgPosition]}`}
+                src={img}
+                alt={alt}
+              />
             </div>
           );
         })}

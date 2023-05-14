@@ -54,6 +54,12 @@ interface DetailsInterface {
   descr: string;
   img: string;
   alt: string;
+  imgPosition?: string;
+}
+
+interface FooterInterface {
+  name: string;
+  url: string;
 }
 
 export type {
@@ -64,4 +70,5 @@ export type {
   SearchByInterface,
   FeaturesInterface,
   DetailsInterface,
+  FooterInterface,
 };

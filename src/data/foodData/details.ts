@@ -21,6 +21,7 @@ const details: DetailsInterface[] = [
       "Get the best fried chicken smeared with a lip smacking lemon chili flavor. Check out best deals for fried chicken.",
     img: barbecue,
     alt: "Barbecue",
+    imgPosition: "left",
   },
   {
     id: 2,

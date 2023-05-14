@@ -1,0 +1,38 @@
+.footer {
+  height: 936px;
+  background-color: #212121;
+  padding: 99px 69px;
+}
+
+.citiesHeader {
+  font-weight: 700;
+  font-size: 22px;
+  text-align: left;
+  color: #ffffff;
+}
+
+.cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10%;
+  margin-top: 24px;
+}
+.city {
+  width: 12%;
+  margin-top: 16px;
+}
+
+.cityLink {
+  font-family: var(--source-sans);
+  font-weight: 400;
+  font-size: 18px;
+  color: #f5f5f5;
+  text-decoration: none;
+}
+
+.divider {
+  height: 4px;
+  background-color: #424242;
+  border-radius: 10px;
+  margin-top: 99px;
+}

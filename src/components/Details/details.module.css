@@ -1,5 +1,5 @@
 .details {
-  height: 1966px;
+  height: 1712px;
   padding: 135px 0;
 }
 
@@ -53,6 +53,6 @@
   width: 800px;
 }
 
-.detailImg:nth-child(2) {
-  order: 1;
+.left {
+  order: -1;
 }
