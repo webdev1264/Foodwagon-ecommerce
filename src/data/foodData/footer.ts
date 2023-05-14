@@ -22,18 +22,6 @@ const cities: FooterInterface[] = [
     url: "",
   },
   {
-    name: "Long Beach",
-    url: "",
-  },
-  {
-    name: "Long Beach",
-    url: "",
-  },
-  {
-    name: "Long Beach",
-    url: "",
-  },
-  {
     name: "Los Angeles",
     url: "",
   },
@@ -83,10 +71,6 @@ const cities: FooterInterface[] = [
   },
   {
     name: "Las Vegas",
-    url: "",
-  },
-  {
-    name: "Sacramento",
     url: "",
   },
   {
