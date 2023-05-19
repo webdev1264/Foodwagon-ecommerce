@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const router = require("./router/index");
 const errorMiddleware = require("./middlewares/error-middleware");
-
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
