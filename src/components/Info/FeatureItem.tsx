@@ -1,8 +1,13 @@
 import React from "react";
-import { FeatureInterface } from "../../types/interfaces";
+import { RestaurantsFeaturesInterface } from "../../types/interfaces";
 import style from "./info.module.css";
 
-const FeatureItem: React.FC<FeatureInterface> = ({ name, descr, src, alt }) => {
+const FeatureItem: React.FC<RestaurantsFeaturesInterface> = ({
+  name,
+  descr,
+  src,
+  alt,
+}) => {
   return (
     <div className={style.featuresItem}>
       <img src={src} alt={alt} />
