@@ -62,6 +62,12 @@ interface FooterInterface {
   url: string;
 }
 
+interface UserInterface {
+  id: string;
+  email: string;
+  isActivated: boolean;
+}
+
 export type {
   PopularItemInterface,
   PromoItemInterface,
@@ -71,4 +77,5 @@ export type {
   FeaturesInterface,
   DetailsInterface,
   FooterInterface,
+  UserInterface
 };

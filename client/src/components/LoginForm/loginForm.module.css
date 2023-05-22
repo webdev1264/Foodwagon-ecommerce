@@ -1,0 +1,80 @@
+.loginFormModal, .regSuccessModal {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.loginFormWrapper {
+  position: relative;
+  font-family: var(--source-sans);
+  width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 64px 30px 30px;
+  border-radius: 15px;
+}
+
+.xMark {
+  position: absolute;
+  top: 22px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.loginFormHeader {
+  font-weight: 700;
+  font-size: 43px;
+  color: #212121;
+}
+
+.loginFormBtn {
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(95.71deg, #ff7a7a -39.64%, #f75900 135.31%);
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.passWrapper {
+  position: relative;
+}
+
+.passToggler {
+  position: absolute;
+  top: 42px;
+  right: 13px;
+  cursor: pointer;
+}
+
+.authRegBtn {
+  background: linear-gradient(95.71deg, #ff7a7a -39.64%, #f75900 135.31%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border: none;
+  font-weight: bold;
+}
+
+.regError {
+  color: red;
+}
+
+.regSuccessWrapper{
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 90px;
+}
+
+.regSuccessHeader {
+  text-align: center;
+  font-weight: bold;
+}

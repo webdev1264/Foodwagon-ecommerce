@@ -1,1 +1,1 @@
-# FoodWagon ecommerce food delivery app.
+# FoodWagon e-commerce food delivery app.
