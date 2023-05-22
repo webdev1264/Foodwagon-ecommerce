@@ -10,13 +10,20 @@ import Features from "./components/Features/Features";
 import Details from "./components/Details/Details";
 import Order from "./components/Order/Order";
 import Footer from "./components/Footer/Footer";
+import LoginForm from "./components/LoginForm/LoginForm";
+import React, { useContext } from "react";
+import { Context } from "./main";
+import { observer } from "mobx-react-lite";
 
-function App() {
+const App: React.FC = observer(() => {
+  const { store } = useContext(Context);
+
   return (
     <ThemeProvider
       breakpoints={["xxl", "xl", "lg", "md", "sm", "xs"]}
       minBreakpoint="xs"
     >
+      {store.isLogin && <LoginForm />}
       <Nav />
       <Header />
       <main>
@@ -31,6 +38,6 @@ function App() {
       <Footer />
     </ThemeProvider>
   );
-}
+});
 
 export default App;

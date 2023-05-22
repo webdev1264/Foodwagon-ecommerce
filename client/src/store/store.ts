@@ -1,12 +1,13 @@
 import { makeAutoObservable } from "mobx";
 import { UserInterface } from "../types/interfaces";
 import authService from "../services/AuthService";
-import axios from "axios";
 
 export default class Store {
   user = {} as UserInterface;
   isAuth = false;
+  isLogin = false;
   isLoading = false;
+  isEmailReg = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -16,12 +17,32 @@ export default class Store {
     this.isAuth = bool;
   }
 
+  setIsLogin(bool: boolean) {
+    this.isLogin = bool;
+  }
+
   setUser(user: UserInterface) {
     this.user = user;
   }
 
   setIsLoading(bool: boolean) {
-    this.isAuth = bool;
+    this.isLoading = bool;
+  }
+
+  setIsEmailReg(bool: boolean) {
+    this.isEmailReg = bool;
+  }
+
+  async registration(email: string, password: string) {
+    try {
+      const response = await authService.registration(email, password);
+      this.setIsEmailReg(false);
+      localStorage.setItem("token", response.data.accessToken);
+      this.setUser(response.data.user);
+    } catch (e) {
+      console.log(e);
+      this.setIsEmailReg(true);
+    }
   }
 
   async login(email: string, password: string) {
@@ -31,9 +52,18 @@ export default class Store {
       this.setIsAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        console.log(e.response?.data?.message);
-      }
+      console.log(e);
+    }
+  }
+
+  async logout() {
+    try {
+      await authService.logout();
+      localStorage.removeItem("token");
+      this.setIsAuth(false);
+      this.setUser({} as UserInterface);
+    } catch (e) {
+      console.log(e);
     }
   }
 }

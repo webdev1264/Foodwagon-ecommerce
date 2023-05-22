@@ -6,8 +6,12 @@ import search from "../../data/img/nav/Search.svg";
 import user from "../../data/img/nav/user.svg";
 import style from "./nav.module.css";
 import { Container } from "react-bootstrap";
+import { useContext } from "react";
+import { Context } from "../../main";
+import { observer } from "mobx-react-lite";
 
-const Nav: React.FC = () => {
+const Nav: React.FC = observer(() => {
+  const { store } = useContext(Context);
   return (
     <Container>
       <nav>
@@ -48,7 +52,10 @@ const Nav: React.FC = () => {
                   />
                   <span className={style.searchDescr}>Search food</span>
                 </a>
-                <button className={style.loginBtn}>
+                <button
+                  className={style.loginBtn}
+                  onClick={() => store.setIsLogin(!store.isLogin)}
+                >
                   <img
                     className={style.loginImg}
                     src={user}
@@ -64,6 +71,6 @@ const Nav: React.FC = () => {
       </nav>
     </Container>
   );
-};
+});
 
 export default Nav;
