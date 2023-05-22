@@ -1,4 +1,4 @@
-.loginFormModal {
+.loginFormModal, .regSuccessModal {
   display: flex;
   position: fixed;
   justify-content: center;
@@ -60,5 +60,21 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   border: none;
+  font-weight: bold;
+}
+
+.regError {
+  color: red;
+}
+
+.regSuccessWrapper{
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 90px;
+}
+
+.regSuccessHeader {
+  text-align: center;
   font-weight: bold;
 }

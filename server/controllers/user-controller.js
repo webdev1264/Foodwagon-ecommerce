@@ -7,7 +7,12 @@ class UserController {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return next(ApiError.BadRequest("Validation error", errors.array()));
+        return next(
+          ApiError.BadRequest(
+            "Your Email must be correct and Password length should be at least 6 characters.",
+            errors.array()
+          )
+        );
       }
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
@@ -36,7 +41,7 @@ class UserController {
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
       res.cookie("refreshToken", userData.refreshToken, {
-        httpOnly: true,
+        httpOnly: false,
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
       res.json(userData);

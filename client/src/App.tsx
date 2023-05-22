@@ -14,6 +14,7 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import React, { useContext } from "react";
 import { Context } from "./main";
 import { observer } from "mobx-react-lite";
+import RegSuccess from "./components/LoginForm/RegSuccess";
 
 const App: React.FC = observer(() => {
   const { store } = useContext(Context);
@@ -24,6 +25,7 @@ const App: React.FC = observer(() => {
       minBreakpoint="xs"
     >
       {store.isLogin && <LoginForm />}
+      {store.isRegSuccess && <RegSuccess />}
       <Nav />
       <Header />
       <main>

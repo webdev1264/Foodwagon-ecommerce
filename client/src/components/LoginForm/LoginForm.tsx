@@ -13,7 +13,7 @@ const LoginForm: React.FC = observer(() => {
   const [isPassVisible, setIsPassVisible] = useState<boolean>(false);
   const [isRegistered, setIsRegistered] = useState(true);
 
-  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isRegistered) {
       return await store.login(email, password);
@@ -21,11 +21,53 @@ const LoginForm: React.FC = observer(() => {
     await store.registration(email, password);
   };
 
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "email") {
+      setEmail(e.target.value);
+    }
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+    }
+    resetErrors();
+  };
+
+  const handleOnClose = () => {
+    store.setIsLogin(!store.isLogin);
+    resetErrors();
+  };
+
+  const handleOnToggle = () => {
+    setIsRegistered(!isRegistered);
+    setEmail("");
+    setPassword("");
+    resetErrors();
+  };
+
+  const resetErrors = () => {
+    store.setRegError("");
+    store.setValError("");
+  };
+
+  if (store.isRegSuccess) {
+    return (
+      <div className={style.regSuccessModal}>
+        <div className={style.regSuccessWrapper}>
+          <FontAwesomeIcon
+            className={style.xMark}
+            icon={faXmark}
+            size="2xl"
+            onClick={() => store.setIsRegSuccess(false)}
+          />
+          <h3 className={style.regSuccessHeader}>
+            You've successfully registered!
+          </h3>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={style.loginFormModal}
-      onClick={() => store.setIsLogin(!store.isLogin)}
-    >
+    <div className={style.loginFormModal} onClick={handleOnClose}>
       <div
         className={style.loginFormWrapper}
         onClick={(e) => e.stopPropagation()}
@@ -34,27 +76,25 @@ const LoginForm: React.FC = observer(() => {
           className={style.xMark}
           icon={faXmark}
           size="2xl"
-          onClick={() => store.setIsLogin(!store.isLogin)}
+          onClick={handleOnClose}
         />
-        <h2 className={style.loginFormHeader}>
+        <h3 className={style.loginFormHeader}>
           {isRegistered ? "Log in" : "Sign up"} to FoodWagon
-        </h2>
-        <Form className={style.loginForm} onSubmit={(e) => handleOnSubmit(e)}>
+        </h3>
+        <Form className={style.loginForm} onSubmit={handleOnFormSubmit}>
           <Form.Group className="my-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
+              name="email"
               placeholder="Enter email"
               required
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleOnInputChange}
               value={email}
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
-            {store.isEmailReg && !isRegistered && (
-              <span>{`The email ${email} already registered`}</span>
-            )}
           </Form.Group>
 
           <Form.Group
@@ -64,11 +104,12 @@ const LoginForm: React.FC = observer(() => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type={isPassVisible ? "text" : "password"}
-              // minLength={6}
+              name="password"
+              minLength={6}
               maxLength={32}
               required
               placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleOnInputChange}
               value={password}
             />
             <FontAwesomeIcon
@@ -77,39 +118,26 @@ const LoginForm: React.FC = observer(() => {
               icon={isPassVisible ? faEye : faEyeSlash}
             />
           </Form.Group>
-          {isRegistered ? (
-            <>
-              <button className={`${style.loginFormBtn} my-3`} type="submit">
-                Login
-              </button>
-              <div>
-                Not registered yet?{" "}
-                <button
-                  className={style.authRegBtn}
-                  onClick={() => setIsRegistered(!isRegistered)}
-                  type="button"
-                >
-                  Sign up
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <button className={`${style.loginFormBtn} my-3`} type="submit">
-                Sign up
-              </button>
-              <div>
-                Already registered?{" "}
-                <button
-                  className={style.authRegBtn}
-                  onClick={() => setIsRegistered(!isRegistered)}
-                  type="button"
-                >
-                  Login
-                </button>
-              </div>
-            </>
+          {store.valError && isRegistered && (
+            <div className={style.regError}>{store.valError}</div>
           )}
+          {store.regError && !isRegistered && (
+            <div className={style.regError}>{store.regError}</div>
+          )}
+
+          <button className={`${style.loginFormBtn} my-3`} type="submit">
+            {isRegistered ? "Login" : "Sign up"}
+          </button>
+          <div>
+            {isRegistered ? "Not registered yet? " : "Already registered?"}
+            <button
+              className={style.authRegBtn}
+              onClick={handleOnToggle}
+              type="button"
+            >
+              {isRegistered ? "Sign up" : "Login"}
+            </button>
+          </div>
         </Form>
       </div>
     </div>

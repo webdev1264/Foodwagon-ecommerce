@@ -6,12 +6,19 @@ import search from "../../data/img/nav/Search.svg";
 import user from "../../data/img/nav/user.svg";
 import style from "./nav.module.css";
 import { Container } from "react-bootstrap";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../../main";
 import { observer } from "mobx-react-lite";
 
 const Nav: React.FC = observer(() => {
   const { store } = useContext(Context);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      store.checkAuth();
+    }
+  }, [store]);
+
   return (
     <Container>
       <nav>
@@ -52,18 +59,33 @@ const Nav: React.FC = observer(() => {
                   />
                   <span className={style.searchDescr}>Search food</span>
                 </a>
-                <button
-                  className={style.loginBtn}
-                  onClick={() => store.setIsLogin(!store.isLogin)}
-                >
-                  <img
-                    className={style.loginImg}
-                    src={user}
-                    alt="user"
-                    width={16}
-                  />
-                  <span>Login</span>
-                </button>
+                {store.isAuth ? (
+                  <button
+                    className={style.loginBtn}
+                    onClick={() => store.logout()}
+                  >
+                    <img
+                      className={style.loginImg}
+                      src={user}
+                      alt="user"
+                      width={16}
+                    />
+                    <span>Logout</span>
+                  </button>
+                ) : (
+                  <button
+                    className={style.loginBtn}
+                    onClick={() => store.setIsLogin(!store.isLogin)}
+                  >
+                    <img
+                      className={style.loginImg}
+                      src={user}
+                      alt="user"
+                      width={16}
+                    />
+                    <span>Login</span>
+                  </button>
+                )}
               </div>
             </div>
           </Col>
