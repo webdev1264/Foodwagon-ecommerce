@@ -13,6 +13,9 @@ router.post(
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
 router.get("/activate/:link", userController.activate);
+router.post("/forgot-password", userController.restore);
+router.get("/forgot-password/:link", userController.verification);
+router.post("/reset-password", userController.reset);
 router.get("/refresh", userController.refresh);
 router.get("/orders", userController.orders); //list of all the orders
 

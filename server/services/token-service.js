@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const tokenModel = require("../models/token-model");
+const ApiError = require("../exceptions/api-error");
 
 class TokenService {
   generateTokens(payload) {
@@ -13,6 +14,13 @@ class TokenService {
       accessToken,
       refreshToken,
     };
+  }
+
+  generateResetToken(payload) {
+    const resetToken = jwt.sign(payload, process.env.JWT_RESET_SECRET, {
+      expiresIn: process.env.JWT_RESET_EXPIRES_IN,
+    });
+    return resetToken;
   }
 
   async saveToken(userId, refreshToken) {
@@ -42,6 +50,11 @@ class TokenService {
 
   validateRefreshToken(refreshToken) {
     const userData = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    return userData;
+  }
+
+  validateResetToken(token) {
+    const userData = jwt.verify(token, process.env.JWT_RESET_SECRET);
     return userData;
   }
 }

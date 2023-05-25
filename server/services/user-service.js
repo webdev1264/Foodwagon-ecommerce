@@ -37,7 +37,7 @@ class UserService {
     const user = await userModel.findOne({ activationLink });
     if (!user) {
       throw ApiError.BadRequest(
-        "Activation error. Activation link is not correct."
+        "Activation error. Activation link is incorrect."
       );
     }
     user.isActivated = true;
@@ -53,9 +53,6 @@ class UserService {
     if (!isPassEquals) {
       throw ApiError.BadRequest("Password is not correct.");
     }
-    // if (!user.isActivated) {
-    //   throw ApiError.BadRequest("The email address was not confirmed through the email activation link.");
-    // }
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
 
@@ -89,6 +86,38 @@ class UserService {
     };
   }
   async getUser() {}
+
+  async restore(email) {
+    const userData = await userModel.findOne({ email });
+    if (!userData) {
+      throw ApiError(`Email ${email} is not registered.`);
+    }
+    const activationLink = uuid.v4();
+    userData.activationLink = activationLink;
+    userData.save();
+
+    await emailService.sendActivationMail(
+      email,
+      `${process.env.API_URL}/api/forgot-password/${activationLink}`
+    );
+    const userDto = new UserDto(userData);
+    return { user: userDto };
+  }
+
+  async verification(activationLink) {
+    const userData = await userModel.findOne({ activationLink });
+    if (!userData) {
+      throw ApiError.BadRequest(
+        "Activation error. Activation link is incorrect."
+      );
+    }
+    const userDto = new UserDto(userData);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    return { ...tokens, user: userDto };
+  }
+
+  async reset() {}
 }
 
 module.exports = new UserService();

@@ -78,6 +78,37 @@ class UserController {
       next(e);
     }
   }
+
+  async restore(req, res, next) {
+    try {
+      const { email } = req.body;
+      const userData = await userService.restore(email);
+      return res.json(userData);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async verification(req, res, next) {
+    try {
+      const activationLink = req.params.link;
+      const userData = await userService.verification(activationLink);
+      res.cookie("token", userData.refreshToken, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 1000,
+      });
+      return res.redirect(process.env.CLIENT_URL);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async reset(req, res, next) {
+    try {
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 module.exports = new UserController();
