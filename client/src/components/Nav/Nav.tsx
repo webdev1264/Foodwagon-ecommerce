@@ -26,7 +26,7 @@ const Nav: React.FC = observer(() => {
           <Col>
             <div className={style.navWrapper}>
               <div className={style.logoWrapper}>
-                <a className={style.logoLink} href=".">
+                <a className={style.logoLink} href="/main">
                   <img src={logo} alt="logo" width={302} height={36.7} />
                 </a>
               </div>

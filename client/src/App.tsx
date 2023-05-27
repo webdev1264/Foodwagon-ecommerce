@@ -1,43 +1,43 @@
 import { ThemeProvider } from "react-bootstrap";
-import Nav from "./components/Nav/Nav";
-import Header from "./components/Header/Header";
-import "./App.css";
-import Info from "./components/Info/Info";
-import Popular from "./components/Popular/Popular";
-import Restaurants from "./components/Restaurants/Restaurants";
-import Search from "./components/Search/Search";
-import Features from "./components/Features/Features";
-import Details from "./components/Details/Details";
-import Order from "./components/Order/Order";
-import Footer from "./components/Footer/Footer";
-import LoginForm from "./components/LoginForm/LoginForm";
-import React, { useContext } from "react";
-import { Context } from "./main";
+import React from "react";
 import { observer } from "mobx-react-lite";
-import RegSuccess from "./components/LoginForm/RegSuccess";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import loader from "../src/utils/routerLoader/index";
+import Root from "./router/root";
+import Main from "./router/main";
+import "./App.css";
+import Forgot from "./router/password-forgot";
+import Reset from "./router/password-reset";
 
 const App: React.FC = observer(() => {
-  const { store } = useContext(Context);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
+        {
+          path: "/main",
+          element: <Main />,
+        },
+        {
+          path: "/password-forgot",
+          element: <Forgot />,
+        },
+        {
+          path: "/password-reset",
+          element: <Reset />,
+          loader,
+        },
+      ],
+    },
+  ]);
 
   return (
     <ThemeProvider
       breakpoints={["xxl", "xl", "lg", "md", "sm", "xs"]}
       minBreakpoint="xs"
     >
-      {store.isLogin && <LoginForm />}
-      {store.isRegSuccess && <RegSuccess />}
-      <Nav />
-      <Header />
-      <main>
-        <Info />
-        <Popular />
-        <Restaurants />
-        <Search />
-        <Features />
-        <Details />
-        <Order />
-      </main>
-      <Footer />
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 });

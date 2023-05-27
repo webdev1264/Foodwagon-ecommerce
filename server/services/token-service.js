@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const tokenModel = require("../models/token-model");
-const ApiError = require("../exceptions/api-error");
+const refreshTokenModel = require("../models/refresh-token-model");
+const resetTokenModel = require("../models/reset-token-model");
 
 class TokenService {
   generateTokens(payload) {
@@ -8,7 +8,7 @@ class TokenService {
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
     });
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
-      expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
+      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
     });
     return {
       accessToken,
@@ -23,23 +23,46 @@ class TokenService {
     return resetToken;
   }
 
-  async saveToken(userId, refreshToken) {
-    const tokenData = await tokenModel.findOne({ user: userId });
+  async saveRefreshToken(userId, refreshToken) {
+    const tokenData = await refreshTokenModel.findOne({ user: userId });
     if (tokenData) {
       tokenData.refreshToken = refreshToken;
-      return tokenData.save();
+      return await tokenData.save();
     }
-    const token = await tokenModel.create({ user: userId, refreshToken });
+    const token = await refreshTokenModel.create({
+      user: userId,
+      refreshToken,
+    });
     return token;
   }
 
-  async findToken(token) {
-    const userData = tokenModel.findOne(token);
-    return userData.refreshToken;
+  async saveResetToken(userId, resetToken) {
+    const tokenData = await resetTokenModel.findOne({ user: userId });
+    if (tokenData) {
+      tokenData.resetToken = resetToken;
+      return await tokenData.save();
+    }
+    const token = await resetTokenModel.create({ user: userId, resetToken });
+    return token;
   }
 
-  async removeToken(refreshToken) {
-    const token = await tokenModel.deleteOne({ refreshToken });
+  async findRefreshToken(refreshToken) {
+    const tokenData = await refreshTokenModel.findOne({ refreshToken });
+    return tokenData;
+  }
+
+  async findResetToken(resetToken) {
+    const tokenData = await resetTokenModel.findOne({ resetToken });
+    return tokenData;
+  }
+
+  async removeRefreshToken(refreshToken) {
+    const token = await refreshTokenModel.deleteOne({ refreshToken });
+    return token;
+  }
+
+  async removeResetToken(resetToken) {
+    const token = await resetTokenModel.deleteOne({ resetToken });
     return token;
   }
 

@@ -18,7 +18,7 @@ class UserController {
       const userData = await userService.registration(email, password);
       res.cookie("refreshToken", userData.refreshToken, {
         httpOnly: true,
-        maxAge: 30 * 24 * 60 * 60 * 1000, //30 days
+        maxAge: 30 * 24 * 60 * 60 * 1000,
       });
       return res.json(userData);
     } catch (e) {
@@ -41,10 +41,10 @@ class UserController {
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
       res.cookie("refreshToken", userData.refreshToken, {
-        httpOnly: false,
+        httpOnly: true,
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
-      res.json(userData);
+      return res.json(userData);
     } catch (e) {
       next(e);
     }
@@ -62,18 +62,22 @@ class UserController {
   }
 
   async refresh(req, res, next) {
-    const { refreshToken } = req.cookies;
-    const userData = await userService.refresh(refreshToken);
-    res.json(userData);
     try {
+      const { refreshToken } = req.cookies;
+      const userData = await userService.refresh(refreshToken);
+      res.cookie("refreshToken", userData.refreshToken, {
+        httpOnly: true,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+      return res.json(userData);
     } catch (e) {
-      next(e);
+      next(e); 
     }
   }
 
   async orders(req, res, next) {
     try {
-      res.json(["Hello world"]);
+      return res.json(["Hello world"]);
     } catch (e) {
       next(e);
     }
@@ -89,22 +93,11 @@ class UserController {
     }
   }
 
-  async verification(req, res, next) {
-    try {
-      const activationLink = req.params.link;
-      const userData = await userService.verification(activationLink);
-      res.cookie("token", userData.refreshToken, {
-        httpOnly: true,
-        maxAge: 60 * 60 * 1000,
-      });
-      return res.redirect(process.env.CLIENT_URL);
-    } catch (e) {
-      next(e);
-    }
-  }
-
   async reset(req, res, next) {
     try {
+      const { userId, password, resetToken } = req.body;
+      const userData = await userService.reset(userId, password, resetToken);
+      return res.json(userData);
     } catch (e) {
       next(e);
     }

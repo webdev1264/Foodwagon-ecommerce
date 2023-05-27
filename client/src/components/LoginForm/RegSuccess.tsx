@@ -9,7 +9,7 @@ const RegSuccess = () => {
   return (
     <div
       className={style.regSuccessModal}
-      onClick={() => store.setIsRegSuccess(false)}
+      onClick={() => store.setIsSuccess(false)}
     >
       <div
         className={style.regSuccessWrapper}
@@ -19,7 +19,7 @@ const RegSuccess = () => {
           className={style.xMark}
           icon={faXmark}
           size="2xl"
-          onClick={() => store.setIsRegSuccess(false)}
+          onClick={() => store.setIsSuccess(false)}
         />
         <h3 className={style.regSuccessHeader}>
           You've successfully registered!

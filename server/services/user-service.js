@@ -14,7 +14,7 @@ class UserService {
         `The user with email address ${email} already registered.`
       );
     }
-    const hashPassword = await bcrypt.hash(password, 3);
+    const hashPassword = await bcrypt.hash(password, 12);
     const activationLink = uuid.v4();
 
     const user = await userModel.create({
@@ -29,7 +29,7 @@ class UserService {
 
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    await tokenService.saveRefreshToken(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };
   }
 
@@ -56,12 +56,12 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
 
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    await tokenService.saveRefreshToken(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };
   }
 
   async logout(refreshToken) {
-    const token = await tokenService.removeToken(refreshToken);
+    const token = await tokenService.removeRefreshToken(refreshToken);
     return token;
   }
 
@@ -70,7 +70,7 @@ class UserService {
       throw ApiError.Unauthorized();
     }
     const userData = tokenService.validateRefreshToken(refreshToken);
-    const tokenFromDB = tokenService.findToken(refreshToken);
+    const tokenFromDB = await tokenService.findRefreshToken(refreshToken);
     if (!userData || !tokenFromDB) {
       throw ApiError.Unauthorized();
     }
@@ -78,46 +78,52 @@ class UserService {
     const userDto = new UserDto(user);
 
     const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    await tokenService.saveRefreshToken(userDto.id, tokens.refreshToken);
 
     return {
       ...tokens,
       user: userDto,
     };
   }
-  async getUser() {}
 
   async restore(email) {
     const userData = await userModel.findOne({ email });
     if (!userData) {
-      throw ApiError(`Email ${email} is not registered.`);
+      throw ApiError.BadRequest(`Email ${email} is not registered.`);
     }
-    const activationLink = uuid.v4();
-    userData.activationLink = activationLink;
-    userData.save();
+    const userDto = new UserDto(userData);
+    const resetToken = tokenService.generateResetToken({ ...userDto });
+    await tokenService.saveResetToken(userDto.id, resetToken);
 
     await emailService.sendActivationMail(
       email,
-      `${process.env.API_URL}/api/forgot-password/${activationLink}`
+      `${process.env.CLIENT_URL}/password-reset?resetToken=${resetToken}&userId=${userDto.id}`
     );
-    const userDto = new UserDto(userData);
+    return { resetToken, user: userDto };
+  }
+
+  async reset(userId, password, resetToken) {
+    if (!resetToken) {
+      throw ApiError.Unauthorized();
+    }
+    const tokenFromDB = await tokenService.findResetToken(resetToken);
+    if (!tokenFromDB) {
+      throw ApiError.BadRequest("Token is invalid.");
+    }
+    const user = await userModel.findById(userId);
+    if (!user) {
+      throw ApiError.BadRequest("User not found.");
+    }
+
+    const hashPassword = await bcrypt.hash(password, 12);
+    user.password = hashPassword;
+    await user.save();
+
+    await tokenService.removeResetToken(resetToken);
+
+    const userDto = new UserDto(user);
     return { user: userDto };
   }
-
-  async verification(activationLink) {
-    const userData = await userModel.findOne({ activationLink });
-    if (!userData) {
-      throw ApiError.BadRequest(
-        "Activation error. Activation link is incorrect."
-      );
-    }
-    const userDto = new UserDto(userData);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
-  }
-
-  async reset() {}
 }
 
 module.exports = new UserService();

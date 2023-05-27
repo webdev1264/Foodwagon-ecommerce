@@ -3,14 +3,17 @@ import { Context } from "../../main";
 import { observer } from "mobx-react-lite";
 import style from "./loginForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Form } from "react-bootstrap";
+import EmailInput from "../Inputs/EmailInput";
+import PasswordInput from "../Inputs/PasswordInput";
+import RegSuccess from "./RegSuccess";
+import SubmitButton from "../Buttons/SubmitButton";
 
 const LoginForm: React.FC = observer(() => {
   const { store } = useContext(Context);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isPassVisible, setIsPassVisible] = useState<boolean>(false);
   const [isRegistered, setIsRegistered] = useState(true);
 
   const handleOnFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,43 +31,20 @@ const LoginForm: React.FC = observer(() => {
     if (e.target.name === "password") {
       setPassword(e.target.value);
     }
-    resetErrors();
+    store.setRespError("");
   };
 
   const handleOnClose = () => {
     store.setIsLogin(!store.isLogin);
-    resetErrors();
+    store.setRespError("");
   };
 
   const handleOnToggle = () => {
     setIsRegistered(!isRegistered);
     setEmail("");
     setPassword("");
-    resetErrors();
+    store.setRespError("");
   };
-
-  const resetErrors = () => {
-    store.setRegError("");
-    store.setValError("");
-  };
-
-  if (store.isRegSuccess) {
-    return (
-      <div className={style.regSuccessModal}>
-        <div className={style.regSuccessWrapper}>
-          <FontAwesomeIcon
-            className={style.xMark}
-            icon={faXmark}
-            size="2xl"
-            onClick={() => store.setIsRegSuccess(false)}
-          />
-          <h3 className={style.regSuccessHeader}>
-            You've successfully registered!
-          </h3>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={style.loginFormModal} onClick={handleOnClose}>
@@ -82,63 +62,31 @@ const LoginForm: React.FC = observer(() => {
           {isRegistered ? "Log in" : "Sign up"} to FoodWagon
         </h3>
         <Form className={style.loginForm} onSubmit={handleOnFormSubmit}>
-          <Form.Group className="my-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              required
-              onChange={handleOnInputChange}
-              value={email}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group
-            className={`${style.passWrapper} my-3`}
-            controlId="formBasicPassword"
-          >
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type={isPassVisible ? "text" : "password"}
-              name="password"
-              minLength={6}
-              maxLength={32}
-              required
-              placeholder="Password"
-              onChange={handleOnInputChange}
-              value={password}
-            />
-            <FontAwesomeIcon
-              className={style.passToggler}
-              onClick={() => setIsPassVisible(!isPassVisible)}
-              icon={isPassVisible ? faEye : faEyeSlash}
-            />
-          </Form.Group>
-          {store.valError && isRegistered && (
-            <div className={style.regError}>{store.valError}</div>
+          <EmailInput handleOnChange={handleOnInputChange} value={email} />
+          <PasswordInput
+            handleOnChange={handleOnInputChange}
+            value={password}
+          />
+          {store.respError && (
+            <div className={style.error}>{store.respError}</div>
           )}
-          {store.regError && !isRegistered && (
-            <div className={style.regError}>{store.regError}</div>
-          )}
-
-          <button className={`${style.loginFormBtn} my-3`} type="submit">
-            {isRegistered ? "Login" : "Sign up"}
-          </button>
-          <div>
-            {isRegistered ? "Not registered yet? " : "Already registered?"}
-            <button
-              className={style.authRegBtn}
-              onClick={handleOnToggle}
-              type="button"
-            >
-              {isRegistered ? "Sign up" : "Login"}
-            </button>
-          </div>
+          <SubmitButton text={isRegistered ? "Login" : "Sign up"} />
         </Form>
+        <div>
+          {isRegistered && (
+            <a className={style.forgotBtn} href="/password-forgot">
+              Forgot your password?
+            </a>
+          )}
+          {isRegistered ? "Not registered yet? " : "Already registered?"}
+          <button
+            className={style.authRegBtn}
+            onClick={handleOnToggle}
+            type="button"
+          >
+            {isRegistered ? "Sign up" : "Login"}
+          </button>
+        </div>
       </div>
     </div>
   );

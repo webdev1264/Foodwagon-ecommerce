@@ -1,0 +1,10 @@
+.loginFormBtn {
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(95.71deg, #ff7a7a -39.64%, #f75900 135.31%);
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+}

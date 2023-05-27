@@ -9,9 +9,10 @@ export default class Store {
   isAuth = false;
   isLogin = false;
   isLoading = false;
-  regError = "";
-  valError = "";
-  isRegSuccess = false;
+  respError = "";
+  // isRegSuccess = false;
+  // isEmailSent = false;
+  isSuccess = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -33,30 +34,34 @@ export default class Store {
     this.isLoading = bool;
   }
 
-  setRegError(message: string) {
-    this.regError = message;
+  setRespError(message: string) {
+    this.respError = message;
   }
 
-  setValError(message: string) {
-    this.valError = message;
-  }
+  // setIsRegSuccess(bool: boolean) {
+  //   this.isRegSuccess = bool;
+  // }
 
-  setIsRegSuccess(bool: boolean) {
-    this.isRegSuccess = bool;
+  // setIsEmailSent(bool: boolean) {
+  //   this.isEmailSent = bool;
+  // }
+
+  setIsSuccess(bool: boolean) {
+    this.isSuccess = bool;
   }
 
   async registration(email: string, password: string) {
     try {
       const response = await authService.registration(email, password);
-      this.setRegError("");
-      this.setIsRegSuccess(true);
+      this.setRespError("");
+      this.setIsSuccess(true);
       this.setIsLogin(!this.isLogin);
       localStorage.setItem("token", response.data.accessToken);
       this.setUser(response.data.user);
     } catch (e) {
       console.log(e);
       if (axios.isAxiosError(e)) {
-        this.setRegError(e.response?.data.message);
+        this.setRespError(e.response?.data.message);
       }
     }
   }
@@ -66,12 +71,12 @@ export default class Store {
       const response = await authService.login(email, password);
       localStorage.setItem("token", response.data.accessToken);
       this.setIsAuth(true);
-      this.setIsLogin(!this.isLogin);
+      this.setIsLogin(false);
       this.setUser(response.data.user);
     } catch (e) {
       console.log(e);
       if (axios.isAxiosError(e)) {
-        this.setValError(e.response?.data.message);
+        this.setRespError(e.response?.data.message);
       }
     }
   }
@@ -93,6 +98,7 @@ export default class Store {
       const response = await axios.get(`${API_URL}/refresh`, {
         withCredentials: true,
       });
+      console.log(response);
       localStorage.setItem("token", response.data.accessToken);
       this.setIsAuth(true);
       this.setUser(response.data.user);
@@ -100,6 +106,31 @@ export default class Store {
       console.log(e);
     } finally {
       this.setIsLoading(false);
+    }
+  }
+
+  async restore(email: string) {
+    try {
+      const response = await authService.restore(email);
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+      if (axios.isAxiosError(e)) {
+        this.setRespError(e.response?.data.message);
+      }
+    }
+  }
+
+  async passReset(userId: string, password: string, resetToken: string) {
+    try {
+      const response = await authService.passReset(
+        userId,
+        password,
+        resetToken
+      );
+      console.log(response);
+    } catch (e) {
+      console.log(e);
     }
   }
 }
